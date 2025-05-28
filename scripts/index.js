@@ -49,5 +49,18 @@ function showWinModal(el) {
 }
 
 // Обработчики событий
-spinButton.addEventListener('click', spinWheel)
-closeButton.addEventListener('click', () => dialog.classList.remove('active'))
+function init() {
+	spinButton.addEventListener('click', spinWheel)
+	document.addEventListener('keydown', e => {
+		if (e.key === 'Enter' && !dialog.classList.contains('active')) {
+			spinWheel()
+		}
+
+		if ((e.key === 'Escape' || e.key === 'Enter') && dialog.classList.contains('active')) {
+			dialog.classList.remove('active')
+		}
+	})
+	closeButton.addEventListener('click', () => dialog.classList.remove('active'))
+}
+
+init()
